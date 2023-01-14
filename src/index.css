@@ -1,0 +1,205 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* outline: 1px solid red; */
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggleBtnLabel {
+  display: flex;
+  font-size: 18px;
+  gap: 6px;
+  padding: 10px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.filter_section_container {
+  /* outline: 1px red solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.reset_btn {
+  padding: 3px;
+  font-size: 16px;
+  background-color: #aaa2a2;
+  border: none;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.reset_btn:hover {
+  background-color: #c2b9b9;
+}
+
+
+.filter_icon {
+  font-size: 15px;
+}
+
+.filter_btn {
+  background-color: rgb(146, 146, 146);
+}
+
+.filter_Btn_container {
+  /* outline: 1px solid red; */
+  padding: 30px 0;
+  min-height: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items:center;
+  gap: 15px;
+}
+
+.filter_Btn_container button  {
+  padding: 3px 20px;
+  border: 1px solid;
+  border-radius: 3px;
+  color: #ffffffd0;
+  cursor: pointer;
+}
+
+.thriller_btn {
+  background-color:crimson;
+}
+
+.thriller_btn:not(.card_category):hover {  
+  background-color:rgb(255, 19, 66);
+}
+
+.comedy_btn {
+background-color:coral;
+}
+.comedy_btn:not(.card_category):hover {
+background-color:rgb(245, 83, 24);
+}
+
+.animation_btn {
+  background-color:rgb(66, 66, 182);
+}
+.animation_btn:not(.card_category):hover {
+  background-color:rgb(1, 1, 199);
+}
+
+.drame_btn {
+  background-color: #3a3434;
+}
+.drame_btn:not(.card_category):hover {
+  background-color: #685d5d;
+}
+
+.filter_submit_btn {
+  padding: 3px 20px;
+  border: 1px solid;
+  border-radius: 3px;
+  background-color:mediumseagreen;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.filter_submit_btn:hover {
+  background-color:rgb(73, 214, 136);
+}
+
+.cardList_Container {
+  width: 100vw;
+  min-height: 50vh;
+  background-color: #f1f1f1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 30px;
+}
+
+.card_container {
+  position: relative;
+  max-width: 100%;
+  width: 260px;
+  min-width: 260px;
+  padding: 30px 5px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 16px;
+  
+  background-color: rgb(102, 17, 128);
+  color: salmon;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(#000, 0.2);
+  user-select: none;
+  transition: 0.25s;
+}
+
+.card_container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 10px -10px rgba(#7f8c8d, 1);
+}
+
+.card_infos {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.card_category {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.card_likes_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  color: #ffffffd0;
+  background-color: #8d55a3;
+  border-radius: 2px;
+}
+
+.remove_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: salmon;
+  background-color: hsl(286, 77%, 28%);
+  border: none;
+  margin: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.toggleBtn {
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: transparent;
+  color: #661180;
+}
+
+
