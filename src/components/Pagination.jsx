@@ -28,6 +28,13 @@ const PaginationContainer = styled.div`
 const PaginationButtons = styled.div`
   display: flex;
   gap: 15px;
+  .currentPageBtn {
+    border-radius: 3px;
+    border:2px solid transparent;
+    padding: 0 5px;
+    color: white;
+    background-color: mediumseagreen;
+  }
 `;
 
 const Button = styled.button`
@@ -60,7 +67,11 @@ export default function Pagination({ currentPage, itemsPerPage, totalItems, }) {
             <PaginationButtons>
                 <Button disabled={currentPage === 1} onClick={() => dispatch(changePage(currentPage - 1))}>◀️ Précédent</Button>
                 {pageNumbers.map(number => (
-                    <Button key={number} onClick={() => dispatch(changePage(number))}>
+                    <Button
+                        key={number}
+                        className={number === currentPage && 'currentPageBtn'}
+                        onClick={() => dispatch(changePage(number))}
+                    >
                         {number}
                     </Button>
                 ))}
