@@ -1,90 +1,65 @@
+// # react-interview : CANDIDATURE KEVIN ADDA - adda-kevin@hotmail.fr
+
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./components/Card";
 import  ToggleLikesBtn  from "./components/ToggleLikesBtn";
 import {movies$} from './data/movies.js'
 import { useEffect } from "react";
-import { filterMovies, setMovies } from "./redux/movies"
-import {IoFilter} from 'react-icons/io5'
-import {GrRefresh} from 'react-icons/gr'
-import FilterBtn from "./components/FilterBtn";
-import { resetSelectedCategories } from "./redux/selectedCategories";
+import { setMovies } from "./redux/movies"
+import Pagination from "./components/Pagination";
+import styled from 'styled-components';
+import FilterSection from "./components/FilterSection";
 
+const CardListContainer = styled.div `
+  width: 100vw;
+  min-height: 100%;
+  background-color: #f1f1f1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 30px;
+`
 
-
-function App() {
+export default function App() {
   const globalState = useSelector(state => state)
+  const currentPage = useSelector(state => state.pagination.currentPage)
+  const itemsPerPage = useSelector(state => state.pagination.itemsPerPage)
+  const totalItems = globalState.movies.length
   const dispatch = useDispatch()
-  
 
+  // Setting current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = globalState.movies.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Setting the movie list at loading
   useEffect(() => {
     movies$.then(movies =>  dispatch(setMovies(movies)))
   }, [dispatch])
 
 
-
-  function handleFilterMovies() {
-     dispatch(filterMovies(globalState.selectedCatgories))
-  }
-
-  function handleResetSelectedCategories() {
-     dispatch(resetSelectedCategories())
-     movies$.then(movies =>  dispatch(setMovies(movies)))
-  }
-
-  
   return (
     <>
       <div className="App">
         <ToggleLikesBtn label="Cacher les likes/dislikes" />
-        <div className="filter_section_container">
-            <div className="filter_Btn_container">
-              {globalState.movies.some(film => film.category === "Thriller") &&
-               <FilterBtn
-                handleClick={handleFilterMovies}
-                text="Thriller"
-                category="Thriller"
-                className={globalState.selectedCatgories.includes("Thriller") ? "thriller_btn" : "filter_btn"} 
-                />}   
-              {globalState.movies.some(film => film.category === "Comedy") &&
-               <FilterBtn 
-               handleClick={handleFilterMovies}
-               text="Comedy" 
-               category="Comedy"
-               className={globalState.selectedCatgories.includes("Comedy") ? "comedy_btn" : "filter_btn"} 
-              />}  
-
-              {globalState.movies.some(film => film.category === "Animation") &&
-               <FilterBtn 
-               handleClick={handleFilterMovies}
-               text="Animation" 
-               category="Animation"
-               className={globalState.selectedCatgories.includes("Animation") ? "animation_btn" : "filter_btn"} 
-              />}  
-
-              {globalState.movies.some(film => film.category === "Drame") &&
-               <FilterBtn 
-               handleClick={handleFilterMovies}
-               text="Drame" 
-               category="Drame"
-               className={globalState.selectedCatgories.includes("Drame") ? "drame_btn" : "filter_btn"}
-              />}    
-
-            </div>
-            <button className="reset_btn" onClick={handleResetSelectedCategories}><GrRefresh /></button>
-            <button className="filter_submit_btn" onClick={handleFilterMovies}>Filtrer <IoFilter className="filter_icon" /></button> 
-        </div>
-
-        <div className="cardList_Container">
-          {globalState.movies.map(movie => 
+        <FilterSection />
+        <CardListContainer className="cardList_Container">
+          {currentItems.map(movie => 
             <Card
               key={movie.id}
               movie={movie}
             />
           )}
-        </div>
+        </CardListContainer>
+        <Pagination 
+          currentPage={currentPage} 
+          itemsPerPage={itemsPerPage} 
+          totalItems={totalItems} 
+        />
       </div>
     </>
   );
 }
 
-export default App;
